@@ -42,9 +42,9 @@ class SolutionTest {
   @org.junit.jupiter.api.Test
   void fill1() {
     final int[][] expect = new int[][] {
-        {0, 1, 2},
-        {7, 8, 3},
-        {6, 5, 4}
+        {1, 2, 3},
+        {8, 9, 4},
+        {7, 6, 5}
     };
     final int[][] result = solution.fill(3, 3);
     assertArrayEquals(expect, result);
