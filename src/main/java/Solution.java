@@ -1,3 +1,11 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+
 public class Solution {
   /**
    * Дан массив чисел. Найдите 2 числа, сумма которых равна target.
@@ -20,10 +28,30 @@ public class Solution {
    * @param target то, чему должна быть равна сумма двух чисел
    * @return массив из двух индексов
    */
-  public int[] twoSum(int[] nums, int target) {
-    //todo: write your code here
-    return new int[0];
-  }
+	public int[] twoSum(int[] nums, int target) {
+
+		Map<Integer, List<Integer>> differences = new HashMap<Integer, List<Integer>>();
+
+		for (int i = 0; i < nums.length; i++) {
+
+			List<Integer> secondIndex = differences.get(nums[i]);
+			if(secondIndex != null) {
+				return new int[] {secondIndex.get(0), i};
+			}
+
+			Integer diff = target - nums[i];
+
+			List<Integer> index = differences.get(diff);
+
+			if(index == null ) {
+				index = new ArrayList<Integer>();
+				differences.put(diff, index);
+			}
+			index.add(i);
+		}
+
+		return new int[0];
+	}
 
 
   /**
@@ -41,7 +69,40 @@ public class Solution {
    * @return заполненный массив
    */
   public int[][] fill(int length, int width) {
-    //todo: write your code here
-    return new int[0][0];
+    int[][] result = new int[length][width];
+
+    int right = width-1;
+    int down = length-1;
+    int up = 0;
+    int left = 0;
+    int i = 0;
+    int j = 0;
+    int inc_i = 1;
+    int inc_j = 0;
+
+    for(int k = 0; k<length*width; k++) {
+    	result[j][i] = k+1;
+		if (i == left && j == up && inc_i != 1 && inc_j == -1) {
+			inc_i = 1;
+			inc_j = 0;
+			left++;
+		} else if (i == right && j == up && inc_j != 1 && inc_i == 1) {
+			inc_i = 0;
+			inc_j = 1;
+			up++;
+		} else if (i == right && j == down && inc_i != -1 && inc_j == 1) {
+			inc_i = -1;
+			inc_j = 0;
+			right--;
+		} else if (i == left && j == down && inc_j != -1 && inc_i == -1) {
+			inc_i = 0;
+			inc_j = -1;
+			down--;
+		}
+    	i += inc_i;
+    	j += inc_j;
+    }
+
+    return result;
   }
 }

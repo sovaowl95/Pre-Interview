@@ -49,4 +49,40 @@ class SolutionTest {
     final int[][] result = solution.fill(3, 3);
     assertArrayEquals(expect, result);
   }
+
+
+  @org.junit.jupiter.api.Test
+  void fill2() {
+    final int[][] expect = new int[][] {
+        {1, 2, 3, 4},
+        {12, 13, 14, 5},
+        {11, 16, 15, 6},
+        {10, 9, 8, 7}
+    };
+    final int[][] result = solution.fill(4, 4);
+    assertArrayEquals(expect, result);
+  }
+
+  @org.junit.jupiter.api.Test
+  void fill3() {
+    final int[][] expect = new int[][] {
+        {1, 2, 3, 4},
+        {10, 11, 12, 5},
+        {9, 8, 7, 6}
+    };
+    final int[][] result = solution.fill(3, 4);
+    assertArrayEquals(expect, result);
+  }
+
+  @org.junit.jupiter.api.Test
+  void fill4() {
+    final int[][] expect = new int[][] {
+        {1, 2, 3},
+        {10, 11, 4},
+        {9, 12, 5},
+        {8, 7, 6},
+    };
+    final int[][] result = solution.fill(4, 3);
+    assertArrayEquals(expect, result);
+  }
 }
