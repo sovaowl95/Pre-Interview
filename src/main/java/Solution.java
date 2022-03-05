@@ -1,3 +1,11 @@
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
+
 public class Solution {
   /**
    * Дан массив чисел. Найдите 2 числа, сумма которых равна target.
@@ -21,10 +29,29 @@ public class Solution {
    * @return массив из двух индексов
    */
 	public int[] twoSum(int[] nums, int target) {
+
+		Map<Integer, List<Integer>> differences = new HashMap<Integer, List<Integer>>();
+
 		for (int i = 0; i < nums.length; i++) {
-			for (int j = i + 1; j < nums.length; j++) {
-				if (nums[i] + nums[j] == target) {
-					return new int[] { i, j };
+
+			Integer diff = target - nums[i];
+
+			List<Integer> index = differences.get(diff);
+
+			if(index == null ) {
+				index = new ArrayList<Integer>();
+				differences.put(diff, index);
+			}
+			index.add(i);
+		}
+
+		for(int i = 0; i < nums.length; i++) {
+			List<Integer> secondIndex = differences.get(nums[i]);
+			if(secondIndex != null) {
+				for (Integer idx: secondIndex) {
+					if(idx != i) {
+						return new int[] {i, idx};
+					}
 				}
 			}
 		}
