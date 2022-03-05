@@ -34,6 +34,11 @@ public class Solution {
 
 		for (int i = 0; i < nums.length; i++) {
 
+			List<Integer> secondIndex = differences.get(nums[i]);
+			if(secondIndex != null) {
+				return new int[] {secondIndex.get(0), i};
+			}
+
 			Integer diff = target - nums[i];
 
 			List<Integer> index = differences.get(diff);
@@ -43,17 +48,6 @@ public class Solution {
 				differences.put(diff, index);
 			}
 			index.add(i);
-		}
-
-		for(int i = 0; i < nums.length; i++) {
-			List<Integer> secondIndex = differences.get(nums[i]);
-			if(secondIndex != null) {
-				for (Integer idx: secondIndex) {
-					if(idx != i) {
-						return new int[] {i, idx};
-					}
-				}
-			}
 		}
 
 		return new int[0];
